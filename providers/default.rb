@@ -23,7 +23,7 @@ def whyrun_supported?
 end
 
 action :add do
-	description = "backup #{new_resource.directory} on #{new_resource.cron_minute} #{new_resource.cron_hour} #{new_resource.cron_day} #{new_resource.cron_month} #{new_resource.cron_weekday}"
+	description = "define #{new_resource.directory} on #{new_resource.cron_minute} #{new_resource.cron_hour} #{new_resource.cron_day} #{new_resource.cron_month} #{new_resource.cron_weekday}"
 	converge_by(description) do
 		cmd = "#{node['tartarus']['run_path']}/tartarus"
 		cmd << " -i" if new_resource.incremental_backup
@@ -51,6 +51,12 @@ action :add do
 			group "root"
 			mode 0644
 		end
+	end
+end
+
+action :schedule do
+	description = "backup #{new_resource.directory} on #{new_resource.cron_minute} #{new_resource.cron_hour} #{new_resource.cron_day} #{new_resource.cron_month} #{new_resource.cron_weekday}"
+	converge_by(description) do
 		cmd << " >/dev/null 2>&1"
 		cron "run_tartarus_profile_#{new_resource.name}" do
 			minute new_resource.cron_minute
