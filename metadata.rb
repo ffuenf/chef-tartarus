@@ -4,13 +4,13 @@ license          "Apache 2.0"
 description      "installs/configures tartarus"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 name             "tartarus"
-version          "1.0.2"
+version          "2.0.0"
 
 %w{ debian }.each do |os|
 	supports os
 end
 
-%w{ apt }.each do |ressource|
+%w{ apt chef-vault }.each do |ressource|
 	depends ressource
 end
 

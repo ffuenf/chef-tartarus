@@ -1,7 +1,7 @@
 # # # # # # #
 # tartarus  #
 # # # # # # #
-node.default['tartarus']['databag'] = Chef::EncryptedDataBagItem.load("tartarus", "default")
+
 node.default['tartarus']['config_path'] = "/etc/tartarus"
 node.default['tartarus']['run_path'] = "/usr/sbin"
 node.default['tartarus']['timestamps_path'] = "/var/spool/tartarus/timestamps"
@@ -16,7 +16,7 @@ node.default['tartarus']['cron']['day'] = "*"
 node.default['tartarus']['cron']['hour'] = "3"
 node.default['tartarus']['cron']['minute'] = "45"
 
-node.default['tartarus']['encrypt_passphrase'] = node['tartarus']['databag']['encrypt_passphrase']
+node.default['tartarus']['encrypt_passphrase'] = nil
 
 node.default['tartarus']['incremental_backup'] = false
 node.default['tartarus']['stay_in_filesystem'] = true

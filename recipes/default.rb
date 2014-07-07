@@ -17,6 +17,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+chef_gem "chef-vault"
+require 'chef-vault'
+
+passwords_tartarus = chef_vault_item("passwords", "tartarus")
+node.set['tartarus']['encrypt_passphrase'] = passwords_tartarus['encrypt_passphrase']
+node.set['tartarus']['storage_ftp_server'] = passwords_tartarus['storage_ftp_server']
+node.set['tartarus']['storage_ftp_user'] = passwords_tartarus['storage_ftp_user']
+node.set['tartarus']['storage_ftp_password'] = passwords_tartarus['storage_ftp_password']
 
 apt_repository node['tartarus']['apt_repository']['name'] do
 	uri node['tartarus']['apt_repository']['uri']
